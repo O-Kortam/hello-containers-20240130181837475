@@ -1,36 +1,35 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata: 
-  name: recommendation-deployment
+metadata:
+  name: cust-recommendation-app
   labels:
-    app: recommendation-engine
-spec: 
+    app: cust-recommendation-app
+spec:
   replicas: 1
   selector:
-    matchLabels: 
-      app: recommendation-engine
-  template: 
+    matchLabels:
+      app: cust-recommendation-app
+  template:
     metadata:
       labels:
-        app: recommendation-engine
-    spec: 
-      containers: 
-      - name: recommendation-app
-        ports:
-        - containerPort: 5000
+        app: cust-recommendation-app
+    spec:
+      containers:
+        - name: recommendation-app
+          ports:
+            - containerPort: 5000
 
 ---
-
-apiVersion: v1 
+apiVersion: v1
 kind: Service
-metadata: 
-  name: flask-service
-spec: 
-  selector: 
-    app: search-engine 
+metadata:
+  name: cust-recommendation-service-cip
+spec:
+  selector:
+    app: cust-recommendation-app
   type: LoadBalancer
   ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 5001
-    # nodePort: 30000
+    - protocol: TCP
+      port: 80
+      targetPort: 5001
+      # nodePort: 30000

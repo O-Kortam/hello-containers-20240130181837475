@@ -10,7 +10,7 @@ app = Flask(__name__)
 # mongo_connection = MongoConnector().connection  # establish connection
 clustered_units = Clustered_Units()
 
-@app.route('/getSimilars', methods=['POST'])
+@app.route('/api/getSimilars', methods=['POST'])
 def searchSimilarity():
     body = request.get_json()
     id = body['id']
