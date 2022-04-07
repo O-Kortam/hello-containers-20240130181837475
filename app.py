@@ -23,7 +23,7 @@ def searchSimilarity():
                 "count": recommendations.shape[0]
                 }
                 }
-        return output
+        return jsonify(output)
     except:
         return jsonify([])
 
