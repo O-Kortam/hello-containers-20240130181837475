@@ -17,7 +17,13 @@ def searchSimilarity():
     lang = body["lang_id"]
     try:
         recommendations = clustered_units.get_recommendations(id, lang)
-        return jsonify(recommendations.to_dict('records'))
+        output={
+                "data": {
+                 "content":recommendations.to_dict('records'),
+                "count": recommendations.shape[0]
+                }
+                }
+        return output
     except:
         return jsonify([])
 

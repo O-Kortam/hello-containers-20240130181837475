@@ -10,3 +10,24 @@ clustering_columns:
   - area
   - price
   - balcony
+
+search_output_columns:
+  - area
+  - bathroom
+  - compound_name
+  - developer_name
+  - floor
+  - model_name
+  - model_text
+  - price
+  - region_text
+  - room
+  - unit_id
+  - usage_text
+  - unit_image
+  - developer_logo
+  - down_payment
+  - deposit
+  - monthly_installment
+  - installment_type
+  - comp_id

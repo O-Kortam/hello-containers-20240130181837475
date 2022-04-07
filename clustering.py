@@ -32,7 +32,7 @@ class Clustered_Units:
         processed_df = self.preprocess_data()
 
         # Sklearn Nearest Neighbors model
-        nbrs = NearestNeighbors(10)
+        nbrs = NearestNeighbors(n_neighbors=10)
 
         # Fit model with the processed data
         knbrs = nbrs.fit(processed_df)
@@ -88,5 +88,5 @@ class Clustered_Units:
         # Get recommended units from the original dataframe
         recommended_units = self.original_df.loc[(self.original_df.unit_id.isin(recommendations_unit_ids)) &
                                                  (self.original_df.lang_id == lang)]
-                                                 
-        return recommended_units
+
+        return recommended_units[self.all_columns["search_output_columns"]]
