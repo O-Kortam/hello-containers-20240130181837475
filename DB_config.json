@@ -13,5 +13,13 @@
         "tls":true,
         "tlsCAFile":"./mongo.crt"
         
+    },
+    "mysql":{
+        "user":"61b0e126b2b249d9abbf15a2993bef0d",
+        "dbname":"eshtri",
+        "password":"f2c8233d029ae3cd3a48ec86640c177f5ea9dadc67cd34a19b4fdb799eece225",
+        "host":"e9850ae3-7d75-4452-96eb-468f6eb1ed86.659dc287bad647f9b4fe17c4e4c38dcc.databases.appdomain.cloud",
+        "port":31911,
+        "sslrootcert":"./mysql.crt"
     }
 }

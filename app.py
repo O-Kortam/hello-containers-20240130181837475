@@ -2,7 +2,7 @@ from flask import Flask
 from flask import request
 from flask import jsonify
 from clustering import Clustered_Units
-from connect import MongoConnector, PostgresConnector
+from connect import MongoConnector, DBConnector
 from compute_similarities import ContentBasedSim
 
 app = Flask(__name__)
@@ -17,13 +17,7 @@ def searchSimilarity():
     lang = body["lang_id"]
     try:
         recommendations = clustered_units.get_recommendations(id, lang)
-        output={
-                "data": {
-                 "content":recommendations.to_dict('records'),
-                "count": recommendations.shape[0]
-                }
-                }
-        return jsonify(output)
+        return jsonify(recommendations.to_dict('records'))
     except:
         return jsonify([])
 

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Eshtri-recommnedation-Engine-new_recommendation.iml" filepath="$PROJECT_DIR$/.idea/Eshtri-recommnedation-Engine-new_recommendation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/eshtri-micro-recommendation.iml" filepath="$PROJECT_DIR$/.idea/eshtri-micro-recommendation.iml" />
     </modules>
   </component>
 </project>
