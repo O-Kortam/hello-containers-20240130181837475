@@ -9,5 +9,4 @@ clustering_columns:
   - room
   - area
   - price
-#  - mod_code
 #  - balcony
