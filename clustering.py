@@ -30,7 +30,7 @@ class Clustered_Units:
     def get_neighbors_metrices(self):
         # Proprocess data to get a dataframe with only the columns that are needed for getting the nearst neighbors
         processed_df = self.preprocess_data()
-        print(processed_df.head())
+        # print(processed_df.head())
         # Sklearn Nearest Neighbors model
         nbrs = NearestNeighbors(n_neighbors=10)
         # Fit model with the processed data
