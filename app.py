@@ -1,33 +1,36 @@
 from flask import Flask
 from flask import request
 from flask import jsonify
-from connect import MongoConnector
+from clustering import Clustered_Units
+from connect import MongoConnector, DBConnector
 from compute_similarities import ContentBasedSim
 
 app = Flask(__name__)
 
-connection = MongoConnector().connection  # establish connection
+# mongo_connection = MongoConnector().connection  # establish connection
+clustered_units = Clustered_Units()
 
-
-@app.route('/getRecommendation', methods=['POST'])
+@app.route('/api/getSimilars', methods=['POST'])
 def searchSimilarity():
     body = request.get_json()
     id = body['id']
+    lang = body["lang_id"]
     try:
-        return jsonify(connection.chatbotDataBase['Unit_Similarities'].find_one({"_id": id})['recommended'])
+        recommendations = clustered_units.get_recommendations(id, lang)
+        return jsonify(recommendations.to_dict('records'))
     except:
         return jsonify([])
 
 
 
-@app.route('/updateSimilarity')
-def updateSimilarity():
-    return ContentBasedSim(connection).update_db()
+# @app.route('/updateSimilarity')
+# def updateSimilarity():
+#     return ContentBasedSim(connection).update_db()
 
 
-@app.route('/insertSimilarity')
-def insertSimilarity():
-    return ContentBasedSim(connection).insert_in_db()
+# @app.route('/insertSimilarity')
+# def insertSimilarity():
+#     return ContentBasedSim(connection).insert_in_db()
 
 
 if __name__ == "__main__":
