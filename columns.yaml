@@ -1,12 +1,12 @@
 clustering_columns:
   - unit_id 
-  - comp_id 
+#  - comp_id
   - reg_id
   - cat_id
-  - dev_id
+#  - dev_id
   - usg_id
   - bathroom
   - room
   - area
   - price
-  - balcony
+#  - balcony
