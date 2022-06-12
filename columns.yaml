@@ -10,3 +10,4 @@ clustering_columns:
   - area
   - price
   - balcony
+  - delivery_date
