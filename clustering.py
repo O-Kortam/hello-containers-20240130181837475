@@ -6,6 +6,7 @@ from sklearn import preprocessing
 import numpy as np
 import pandas as pd
 import yaml
+import datetime
 from clusteval import clusteval
 
 
@@ -14,6 +15,7 @@ def connect_to_db():
 
 
 class Clustered_Units:
+    print("strat to clustering units")
     def __init__(self):
         self.connection = connect_to_db()
 
@@ -28,6 +30,7 @@ class Clustered_Units:
         self.nearest_neighbors_df = self.get_neighbors_metrices()
 
     def get_neighbors_metrices(self):
+        print("--------> get_neighbors_metrices")
         # Proprocess data to get a dataframe with only the columns that are needed for getting the nearst neighbors
         processed_df = self.preprocess_data()
         # print(processed_df.head())
@@ -53,8 +56,9 @@ class Clustered_Units:
     def read_data(self):
         while True:
             try:
-                sql = "SELECT * FROM eshtri.unit_search_engine where stat_id = 1;"
+                sql = "SELECT * FROM eshtri.unit_search_engine where stat_id = 1 and price > 100000;"
                 df = pd.read_sql(sql, self.connection)
+                df['delivery_year'] = df.delivery_date.dt.year
                 self.connection.close()
                 return df
 
@@ -63,6 +67,7 @@ class Clustered_Units:
                 self.connection = connect_to_db()
 
     def preprocess_data(self):
+        print("---------> preprocess_data")
         processed = self.original_df[self.all_columns["clustering_columns"]
         ].loc[self.original_df.lang_id == 1]
         processed.set_index('unit_id', inplace=True)
@@ -74,6 +79,7 @@ class Clustered_Units:
         return processed
 
     def get_recommendations(self, unit_id, lang):
+        print("----------> get_recommendations")
         # Get Recommendations for the selected unit
         recommendations_unit_ids = self.nearest_neighbors_df.loc[unit_id]
 

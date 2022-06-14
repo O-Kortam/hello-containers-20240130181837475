@@ -12,6 +12,7 @@ clustered_units = Clustered_Units()
 
 @app.route('/api/getSimilars', methods=['POST'])
 def searchSimilarity():
+    print("search fot the similar units")
     body = request.get_json()
     id = body['id']
     lang = body["lang_id"]

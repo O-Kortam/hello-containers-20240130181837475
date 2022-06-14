@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="32384bf6-75b7-4259-af63-ba54e35c124b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clustering.py" beforeDir="false" afterPath="$PROJECT_DIR$/clustering.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/columns.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/columns.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compute_similarities.py" beforeDir="false" afterPath="$PROJECT_DIR$/compute_similarities.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/connect.py" beforeDir="false" afterPath="$PROJECT_DIR$/connect.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +89,7 @@
       <updated>1654971540041</updated>
       <workItem from="1654971541351" duration="11065000" />
       <workItem from="1655046699516" duration="677000" />
-      <workItem from="1655047753498" duration="4183000" />
+      <workItem from="1655047753498" duration="9520000" />
     </task>
     <servers />
   </component>

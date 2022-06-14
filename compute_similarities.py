@@ -6,6 +6,7 @@ import time
 
 
 def read_data(connection):
+    print("start reading the data function")
     df = pd.DataFrame(list(connection.chatbotDataBase.Unit.find()))[
         ['_id', 'floor', 'status_desc',
          'ru_view_desc', 'usage_type', 'garden', 'bathroom', 'numberofrooms', 'balcony',
@@ -14,6 +15,7 @@ def read_data(connection):
 
 
 def process_split_data(df):
+    print("start to split the data")
     df.floor.replace({'GF': 0, '': 'No Floor'}, inplace=True)
     df.balcony.fillna(0, inplace=True)
     df.usage_type.replace({'1': 'Appartment', '2': 'Villa'}, inplace=True)
@@ -27,6 +29,7 @@ def process_split_data(df):
 
 
 def process_appartments(df_app):
+    print("-------> process_appartments")
     df_app.drop(columns=['Villa', 'Appartment'], inplace=True)
     df_app.drop(columns='status_desc', inplace=True)
     df_app.floor.replace({'GF': 0}, inplace=True)
@@ -37,6 +40,7 @@ def process_appartments(df_app):
 
 
 def process_villas(df_villa):
+    print("-------> process_villas")
     df_villa.drop(columns=['Villa', 'Appartment', 'floor'], inplace=True)
     df_villa.drop(columns='status_desc', inplace=True)
     df_villa.set_index('_id', inplace=True)
@@ -46,6 +50,7 @@ def process_villas(df_villa):
 
 
 def similarity_mats(app, villa):
+    print("computing the similarity matrix")
     app_similarity = pd.DataFrame(cosine_similarity(app, app),
                                   columns=app.index,
                                   index=app.index)
@@ -62,12 +67,14 @@ class ContentBasedSim:
     #  Update DB
 
     def update_record(self, key, arr):
+        print("updating the records")
         myquery = {"_id": key}
         newvalues = {"$set": {"recommended": arr}}
         self.connection.chatbotDataBase['Unit_Similarities'].update_one(myquery, newvalues)
         return 'done'
 
     def update_db(self):
+        print("updating the DB")
         df = read_data(self.connection)
         app_data, villa_data = process_split_data(df)
         apartments = process_appartments(app_data)
@@ -86,10 +93,12 @@ class ContentBasedSim:
     # Insert in DB
 
     def add_to_dict(self, key, arr):
+        print("-----------> add_to_dict")
         self.unit_sim_arr.append({"_id": key, "recommended": arr})
         return 'done'
 
     def insert_in_db(self):
+        print("-----------> insert_in_db")
         df = read_data(self.connection)
         app_data, villa_data = process_split_data(df)
         apartments = process_appartments(app_data)
