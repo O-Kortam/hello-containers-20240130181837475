@@ -25,4 +25,4 @@ class DBConnector:
                                 password=connection_json["password"],
                                 host=connection_json["host"],
                                 port=connection_json["port"],
-                                ssl_ca='mysql.crt')
+                                ssl_ca=connection_json["ssl_ca"])

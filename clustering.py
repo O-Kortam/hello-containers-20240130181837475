@@ -1,9 +1,12 @@
+import atexit
 from concurrent.futures import process
 from sklearn.cluster import KMeans
+from apscheduler.schedulers.background import BackgroundScheduler
 from sklearn.neighbors import NearestNeighbors
 from connect import DBConnector
 from sklearn import preprocessing
 import numpy as np
+import datetime
 import pandas as pd
 import yaml
 from clusteval import clusteval
@@ -25,6 +28,22 @@ class Clustered_Units:
         # print(self.original_df.head())
         # Get nearest Neigbors dataframe
         # This dataframe holds the nearest 10 units for each unit
+        self.nearest_neighbors_df = self.get_neighbors_metrices()
+        scheduler = BackgroundScheduler()
+        scheduler.add_job(func=self.update_df, trigger="interval", seconds=1800)
+        scheduler.add_job(func=self.update_neighbors_metrices, trigger="interval", seconds=1800)
+        scheduler.start()
+        atexit.register(lambda: scheduler.shutdown())
+
+    # update_df is called periodically by the scheduler to read and process the data from the database
+
+    def update_df(self):
+        print('updating dataframe')
+        print(datetime.datetime.now())
+        self.original_df = self.read_data()
+
+    def update_neighbors_metrices(self):
+        print("updating nearest neighbors df <-------------------->")
         self.nearest_neighbors_df = self.get_neighbors_metrices()
 
     def get_neighbors_metrices(self):
@@ -53,8 +72,9 @@ class Clustered_Units:
     def read_data(self):
         while True:
             try:
-                sql = "SELECT * FROM eshtri.unit_search_engine where stat_id = 1;"
+                sql = "SELECT * FROM eshtri.unit_search_engine where stat_id = 1 and price > 100000;"
                 df = pd.read_sql(sql, self.connection)
+                df['delivery_year'] = df.delivery_date.dt.year
                 self.connection.close()
                 return df
 
