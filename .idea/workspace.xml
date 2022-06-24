@@ -5,10 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32384bf6-75b7-4259-af63-ba54e35c124b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/eshtri-micro-recommendation.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/eshtri-micro-recommendation.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/DB_config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clustering.py" beforeDir="false" afterPath="$PROJECT_DIR$/clustering.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compute_similarities.py" beforeDir="false" afterPath="$PROJECT_DIR$/compute_similarities.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/columns.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/columns.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/connect.py" beforeDir="false" afterPath="$PROJECT_DIR$/connect.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -55,7 +57,7 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Flask server.Flask (app.py)">
     <configuration name="eshtri-micro-recommendation" type="PythonConfigurationType" factoryName="Python">
       <module name="eshtri-micro-recommendation" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -78,6 +80,26 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Flask (app.py)" type="Python.FlaskServer" temporary="true" nameIsGenerated="true">
+      <module name="eshtri-micro-recommendation" />
+      <option name="target" value="$PROJECT_DIR$/app.py" />
+      <option name="targetType" value="PATH" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Flask server.Flask (app.py)" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -90,6 +112,7 @@
       <workItem from="1654971541351" duration="11065000" />
       <workItem from="1655046699516" duration="677000" />
       <workItem from="1655047753498" duration="9520000" />
+      <workItem from="1656083024423" duration="1771000" />
     </task>
     <servers />
   </component>
@@ -106,5 +129,8 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/eshtri_micro_recommendation$eshtri_micro_recommendation.coverage" NAME="eshtri-micro-recommendation Coverage Results" MODIFIED="1656084798008" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

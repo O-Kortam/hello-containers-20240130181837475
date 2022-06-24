@@ -1,12 +1,14 @@
+import atexit
 from concurrent.futures import process
 from sklearn.cluster import KMeans
+from apscheduler.schedulers.background import BackgroundScheduler
 from sklearn.neighbors import NearestNeighbors
 from connect import DBConnector
 from sklearn import preprocessing
 import numpy as np
+import datetime
 import pandas as pd
 import yaml
-import datetime
 from clusteval import clusteval
 
 
@@ -15,7 +17,6 @@ def connect_to_db():
 
 
 class Clustered_Units:
-    print("strat to clustering units")
     def __init__(self):
         self.connection = connect_to_db()
 
@@ -28,9 +29,24 @@ class Clustered_Units:
         # Get nearest Neigbors dataframe
         # This dataframe holds the nearest 10 units for each unit
         self.nearest_neighbors_df = self.get_neighbors_metrices()
+        scheduler = BackgroundScheduler()
+        scheduler.add_job(func=self.update_df, trigger="interval", seconds=1800)
+        scheduler.add_job(func=self.update_neighbors_metrices, trigger="interval", seconds=1800)
+        scheduler.start()
+        atexit.register(lambda: scheduler.shutdown())
+
+    # update_df is called periodically by the scheduler to read and process the data from the database
+
+    def update_df(self):
+        print('updating dataframe')
+        print(datetime.datetime.now())
+        self.original_df = self.read_data()
+
+    def update_neighbors_metrices(self):
+        print("updating nearest neighbors df <-------------------->")
+        self.nearest_neighbors_df = self.get_neighbors_metrices()
 
     def get_neighbors_metrices(self):
-        print("--------> get_neighbors_metrices")
         # Proprocess data to get a dataframe with only the columns that are needed for getting the nearst neighbors
         processed_df = self.preprocess_data()
         # print(processed_df.head())
@@ -56,18 +72,21 @@ class Clustered_Units:
     def read_data(self):
         while True:
             try:
+                self.connection = connect_to_db()
                 sql = "SELECT * FROM eshtri.unit_search_engine where stat_id = 1 and price > 100000;"
                 df = pd.read_sql(sql, self.connection)
                 df['delivery_year'] = df.delivery_date.dt.year
-                self.connection.close()
                 return df
 
             except Exception as e:
                 print('Error', e)
                 self.connection = connect_to_db()
 
+            finally:
+                self.connection.close()
+
+
     def preprocess_data(self):
-        print("---------> preprocess_data")
         processed = self.original_df[self.all_columns["clustering_columns"]
         ].loc[self.original_df.lang_id == 1]
         processed.set_index('unit_id', inplace=True)
@@ -79,7 +98,6 @@ class Clustered_Units:
         return processed
 
     def get_recommendations(self, unit_id, lang):
-        print("----------> get_recommendations")
         # Get Recommendations for the selected unit
         recommendations_unit_ids = self.nearest_neighbors_df.loc[unit_id]
 

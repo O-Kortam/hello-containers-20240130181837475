@@ -12,14 +12,14 @@ clustered_units = Clustered_Units()
 
 @app.route('/api/getSimilars', methods=['POST'])
 def searchSimilarity():
-    print("search fot the similar units")
     body = request.get_json()
     id = body['id']
     lang = body["lang_id"]
     try:
         recommendations = clustered_units.get_recommendations(id, lang)
         return jsonify(recommendations.to_dict('records'))
-    except:
+    except Exception as e:
+        print("exception occured",e)
         return jsonify([])
 
 

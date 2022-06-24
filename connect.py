@@ -21,11 +21,8 @@ class MongoConnector:
 
 class DBConnector:
     def __init__(self):
-        print('trying to access DB')
         self.connection = pymysql.connect(user=connection_json["user"], database=connection_json["dbname"],
                                 password=connection_json["password"],
                                 host=connection_json["host"],
                                 port=connection_json["port"],
-                                ssl_ca='mysql.crt')
-
-        print('Connection Success')
+                                ssl_ca=connection_json["ssl_ca"])

@@ -21,6 +21,6 @@
 	    "password": "72a72c846008f37fd36c0cc4e3dba961d63c038293fa5fd923753eb8b4bd49e4",
 	    "host": "17a13b1c-ccf0-4f2e-84be-df3316f5db70.bngflf7f0ktkmkdl3jhg.databases.appdomain.cloud",
 	    "port": 32030,
-	    "sslrootcert": "./mysql.crt"
+        "ssl_ca":"./mysql.crt"
 	  }
 }
