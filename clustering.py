@@ -72,15 +72,19 @@ class Clustered_Units:
     def read_data(self):
         while True:
             try:
+                self.connection = connect_to_db()
                 sql = "SELECT * FROM eshtri.unit_search_engine where stat_id = 1 and price > 100000;"
                 df = pd.read_sql(sql, self.connection)
                 df['delivery_year'] = df.delivery_date.dt.year
-                self.connection.close()
                 return df
 
             except Exception as e:
                 print('Error', e)
                 self.connection = connect_to_db()
+
+            finally:
+                self.connection.close()
+
 
     def preprocess_data(self):
         processed = self.original_df[self.all_columns["clustering_columns"]

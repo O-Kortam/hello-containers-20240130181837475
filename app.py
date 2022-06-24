@@ -18,7 +18,8 @@ def searchSimilarity():
     try:
         recommendations = clustered_units.get_recommendations(id, lang)
         return jsonify(recommendations.to_dict('records'))
-    except:
+    except Exception as e:
+        print("exception occured",e)
         return jsonify([])
 
 
