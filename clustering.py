@@ -51,7 +51,7 @@ class Clustered_Units:
         processed_df = self.preprocess_data()
         # print(processed_df.head())
         # Sklearn Nearest Neighbors model
-        nbrs = NearestNeighbors(n_neighbors=10)
+        nbrs = NearestNeighbors(n_neighbors=100)
         # Fit model with the processed data
         knbrs = nbrs.fit(processed_df)
         # Get 10 nearest neighbors for each unit

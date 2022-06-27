@@ -17,6 +17,7 @@ def searchSimilarity():
     lang = body["lang_id"]
     try:
         recommendations = clustered_units.get_recommendations(id, lang)
+        recommendations = recommendations.drop_duplicates(subset=['mod_id'], keep="first", inplace=False).head(10)
         return jsonify(recommendations.to_dict('records'))
     except Exception as e:
         print("exception occured",e)
