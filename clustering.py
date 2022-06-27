@@ -18,13 +18,18 @@ def connect_to_db():
 
 class Clustered_Units:
     def __init__(self):
+        print("Starting database connection")
         self.connection = connect_to_db()
+        print("Database connection success")
 
         with open(r'./columns.yaml') as file:
             self.all_columns = yaml.full_load(file)
 
         # Read Data
+        print("Starting reading from database")
         self.original_df = self.read_data()
+        print("data has been read successfully")
+
         # print(self.original_df.head())
         # Get nearest Neigbors dataframe
         # This dataframe holds the nearest 10 units for each unit
@@ -53,11 +58,13 @@ class Clustered_Units:
         # Sklearn Nearest Neighbors model
         nbrs = NearestNeighbors(n_neighbors=100)
         # Fit model with the processed data
+        print("clustering process")
         knbrs = nbrs.fit(processed_df)
         # Get 10 nearest neighbors for each unit
         dist, indices = knbrs.kneighbors(processed_df)
         # Return unit_id column in the dataframe
         processed_df.reset_index(inplace=True)
+        print("end clustering process")
         # Convert indices 2-D array into dataframe
         indices_df = pd.DataFrame(indices)
         # Convert indices of the neares neighbors into unit_ids
@@ -76,14 +83,13 @@ class Clustered_Units:
                 sql = "SELECT * FROM eshtri.unit_search_engine where stat_id = 1 and price > 100000;"
                 df = pd.read_sql(sql, self.connection)
                 df['delivery_year'] = df.delivery_date.dt.year
+                self.connection.close()
                 return df
 
             except Exception as e:
                 print('Error', e)
                 self.connection = connect_to_db()
 
-            finally:
-                self.connection.close()
 
 
     def preprocess_data(self):

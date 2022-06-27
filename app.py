@@ -8,7 +8,9 @@ from compute_similarities import ContentBasedSim
 app = Flask(__name__)
 
 # mongo_connection = MongoConnector().connection  # establish connection
+print("Start code preparation")
 clustered_units = Clustered_Units()
+print("End code preparation")
 
 @app.route('/api/getSimilars', methods=['POST'])
 def searchSimilarity():
