@@ -16,11 +16,11 @@
     },
 
     "mysql": {
-        "user": "c050fb2633f14190bfe06c5d9f8e0ef9",
-	    "dbname": "eshtri",
-	    "password": "72a72c846008f37fd36c0cc4e3dba961d63c038293fa5fd923753eb8b4bd49e4",
-	    "host": "17a13b1c-ccf0-4f2e-84be-df3316f5db70.bngflf7f0ktkmkdl3jhg.databases.appdomain.cloud",
-	    "port": 32030,
-        "ssl_ca":"./mysql.crt"
-	  }
+        "user": "9734f20bb54340e483093ca498d8cda8",
+    "dbname": "eshtri",
+    "password": "418481cf8a8ea315bf8201878329746feba3c8c799f5729c1ddcd90c71d327ad",
+    "host": "c561358e-a1cd-4278-8344-a307625ab741.bc28ac43cf10402584b5f01db462d330.databases.appdomain.cloud",
+    "port": 31778,
+    "ssl_ca": "./mysql.crt"
+    }
 }
