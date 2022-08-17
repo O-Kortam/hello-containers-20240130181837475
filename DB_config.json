@@ -14,12 +14,12 @@
         "tlsCAFile":"./mongo.crt"
         
     },
-    "mysql":{
-        "user":"61b0e126b2b249d9abbf15a2993bef0d",
-        "dbname":"eshtri",
-        "password":"f2c8233d029ae3cd3a48ec86640c177f5ea9dadc67cd34a19b4fdb799eece225",
-        "host":"e9850ae3-7d75-4452-96eb-468f6eb1ed86.659dc287bad647f9b4fe17c4e4c38dcc.databases.appdomain.cloud",
-        "port":31911,
-        "ssl_ca":"./mysql.crt"
+    "mysql": {
+        "user": "d0b79c28c6144af3bf2a75d10fd71444",
+    "dbname": "eshtri",
+    "password": "6196c0dab842964e758ec1060717c1658b70d3892fae7a425b863cbe151fba35",
+    "host": "497d95ba-31be-4b95-ab76-2aa981d07d6d.c3jgsjqf0prn36465j00.databases.appdomain.cloud",
+    "port": 30446,
+    "ssl_ca": "./mysql.crt"
     }
 }
