@@ -52,11 +52,15 @@ class Clustered_Units:
         self.nearest_neighbors_df = self.get_neighbors_metrices()
 
     def get_neighbors_metrices(self):
+        print("get_neighbors_metrices")
         # Proprocess data to get a dataframe with only the columns that are needed for getting the nearst neighbors
         processed_df = self.preprocess_data()
+        print("processed_df", processed_df.head(2))
         # print(processed_df.head())
         # Sklearn Nearest Neighbors model
         nbrs = NearestNeighbors(n_neighbors=100)
+        print("nbrs", nbrs)
+
         # Fit model with the processed data
         print("clustering process")
         knbrs = nbrs.fit(processed_df)
@@ -73,6 +77,7 @@ class Clustered_Units:
 
         # Set index of the nearest neighbors dataframe to be the unit_id column
         nearest_neighbors_df.set_index(processed_df['unit_id'], inplace=True)
+        print("nearest_neighbors_df",nearest_neighbors_df.head(3))
 
         return nearest_neighbors_df
 
@@ -80,11 +85,12 @@ class Clustered_Units:
         while True:
             try:
                 self.connection = connect_to_db()
-                sql = "SELECT * FROM eshtri.unit_search_engine where stat_id = 1 and price > 100000;"
+                sql = "SELECT * FROM eshtri.unit_search_sorting where price > 100000;"
                 print("1")
                 df = pd.read_sql(sql, self.connection)
-                print("2")
+
                 df['delivery_year'] = df.delivery_date.dt.year
+                print("df", df)
                 return df
             except Exception as e:
                 print('Error', e)
@@ -109,14 +115,19 @@ class Clustered_Units:
 
     def get_recommendations(self, unit_id, lang):
         # Get Recommendations for the selected unit
+        print("get_recommendations")
         recommendations_unit_ids = self.nearest_neighbors_df.loc[unit_id]
-
+        print("recommendations_unit_ids 1", recommendations_unit_ids)
         # Filter recommendations to remove the actual unit if it is presented in the recommendations
         recommendations_unit_ids = list(filter(
             lambda id: unit_id != id, recommendations_unit_ids))
+        print("recommendations_unit_ids 2", recommendations_unit_ids)
+
+        print("self.original_df",self.original_df)
 
         # Get recommended units from the original dataframe
         recommended_units = self.original_df.loc[(self.original_df.unit_id.isin(recommendations_unit_ids)) &
-                                                 (self.original_df.lang_id == lang)]
+                                                 (self.original_df.lang_id == lang) & self.original_df["unit_search_status"]==1]
+        print(recommended_units)
 
         return recommended_units
