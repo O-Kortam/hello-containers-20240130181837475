@@ -3,8 +3,8 @@ clustering_columns:
   - reg_id
   - cat_id
   - usg_id
-  - bathroom
-  - room
-  - area
   - price
-  - balcony
+#  - bathroom
+#  - room
+#  - area
+#  - balcony
