@@ -12,21 +12,21 @@ print("Start code preparation")
 clustered_units = Clustered_Units()
 print("End code preparation")
 
-@app.route('/api/getRecs', methods=['POST'])
-def searchSimilarity():
-    body = request.get_json()
-    id = body['id']
-    print("id",id)
-    lang = body["lang_id"]
-    try:
-        print("Units clicekd by user {} : ".format(id))
-        print(clustered_units.get_user_clicks(id))
-        recommendations = clustered_units.get_user_recommended_units(id , lang)
-        print("User Recommendations !!")
-        return jsonify(recommendations.to_dict('records'))
-    except Exception as e:
-        print("exception occured",e)
-        return jsonify([])
+# @app.route('/api/getRecs', methods=['POST'])
+# def searchSimilarity():
+#     body = request.get_json()
+#     id = body['id']
+#     print("id",id)
+#     lang = body["lang_id"]
+#     try:
+#         print("Units clicekd by user {} : ".format(id))
+#         print(clustered_units.get_user_clicks(id))
+#         recommendations = clustered_units.get_user_recommended_units(id , lang)
+#         print("User Recommendations !!")
+#         return jsonify(recommendations.to_dict('records'))
+#     except Exception as e:
+#         print("exception occured",e)
+#         return jsonify([])
 
 @app.route('/api/getSimilars', methods=['POST'])
 def get_similar_units():
@@ -43,17 +43,17 @@ def get_similar_units():
         print("exception occured",e)
         return jsonify([])
 
-@app.route('/api/getTrending', methods=['POST'])
-def get_trending_units():
-    try:
-        body = request.get_json()
-        lang = body["lang_id"]
-        recommendations = clustered_units.get_popular_units(lang)
-        print("Trending Items !!")
-        return jsonify(recommendations.to_dict('records'))
-    except Exception as e:
-        print("exception occured",e)
-        return jsonify([])
+# @app.route('/api/getTrending', methods=['POST'])
+# def get_trending_units():
+#     try:
+#         body = request.get_json()
+#         lang = body["lang_id"]
+#         recommendations = clustered_units.get_popular_units(lang)
+#         print("Trending Items !!")
+#         return jsonify(recommendations.to_dict('records'))
+#     except Exception as e:
+#         print("exception occured",e)
+#         return jsonify([])
 
 # @app.route('/updateSimilarity')
 # def updateSimilarity():
