@@ -163,6 +163,7 @@ class Clustered_Units:
         # Fit model with the processed data
         print("KNN process....")
         knbrs = nbrs.fit(processed)
+
         # Get all nearest neighbors for each unit
         dist, indices = knbrs.kneighbors(processed, processed.shape[0], return_distance=True)
         print("Done")
