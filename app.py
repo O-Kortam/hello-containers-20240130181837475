@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import request
 from flask import jsonify
-from clustering02 import Clustered_Units
+from clustering import Clustered_Units
 from connect import MongoConnector, DBConnector
 from compute_similarities import ContentBasedSim
 
